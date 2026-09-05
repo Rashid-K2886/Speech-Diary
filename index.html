@@ -21,7 +21,7 @@
             background-color: var(--gray-bg);
             color: var(--text);
             margin: 0;
-            padding: 20px;
+            padding: 10px;
         }
 
         .container {
@@ -35,30 +35,31 @@
             align-items: center;
             background-color: var(--primary);
             color: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
-        h1 { margin: 0; font-size: 26px; text-align: center; }
+        h1 { margin: 0; font-size: 22px; text-align: center; }
 
         .btn-primary {
             background-color: var(--primary-light);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 15px;
             border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
             transition: background 0.3s;
+            font-size: 14px;
         }
 
         .btn-primary:hover { background-color: var(--primary-dark); }
 
         .btn-small {
-            padding: 6px 12px;
-            font-size: 13px;
+            padding: 6px 10px;
+            font-size: 12px;
             border-radius: 4px;
             border: none;
             cursor: pointer;
@@ -74,9 +75,9 @@
         .calendar-card {
             background: white;
             border-radius: 10px;
-            padding: 20px;
+            padding: 15px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .calendar-header {
@@ -86,24 +87,29 @@
             margin-bottom: 15px;
         }
 
+        .calendar-header h2 {
+            font-size: 18px;
+        }
+
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
+            gap: 4px;
             text-align: center;
         }
 
         .day-label {
             font-weight: bold;
             color: #64748b;
-            padding: 8px;
+            padding: 4px 0;
+            font-size: 12px;
         }
 
         .day-cell {
             background-color: #f1f5f9;
-            border-radius: 8px;
-            padding: 10px;
-            min-height: 75px;
+            border-radius: 6px;
+            padding: 6px 2px;
+            min-height: 60px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -113,26 +119,25 @@
 
         .day-cell:hover { 
             background-color: #e2e8f0; 
-            transform: translateY(-2px);
         }
         
-        .day-cell.free { border-bottom: 4px solid #22c55e; }
-        .day-cell.busy { background-color: #dbeafe; border-bottom: 4px solid var(--primary-light); }
+        .day-cell.free { border-bottom: 3px solid #22c55e; }
+        .day-cell.busy { background-color: #dbeafe; border-bottom: 3px solid var(--primary-light); }
         
         .day-number { 
             font-weight: 800; 
-            font-size: 20px; 
+            font-size: 15px; 
             text-align: right; 
             color: var(--primary);
+            padding-right: 2px;
         }
 
         .badge-count {
-            font-size: 11px;
+            font-size: 9px;
             background: var(--primary);
             color: white;
-            border-radius: 12px;
-            padding: 2px 6px;
-            margin-top: 4px;
+            border-radius: 10px;
+            padding: 2px 3px;
             font-weight: 600;
         }
 
@@ -145,39 +150,61 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            padding: 10px;
+            box-sizing: border-box;
         }
 
         .modal-content {
             background: white;
-            padding: 25px;
+            padding: 20px;
             border-radius: 10px;
             width: 100%;
             max-width: 450px;
             box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .form-group { margin-bottom: 12px; }
+        label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px; }
         input, select {
             width: 100%; padding: 10px; box-sizing: border-box;
-            border: 1px solid #cbd5e1; border-radius: 6px;
+            border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px;
         }
 
         .event-card {
             background: white;
-            padding: 15px;
+            padding: 12px;
             border-left: 5px solid var(--primary-light);
             border-radius: 6px;
             margin-bottom: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .event-info {
+            font-size: 13px;
+            line-height: 1.5;
+            word-break: break-word;
         }
 
         .event-actions {
             display: flex;
-            gap: 8px;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        /* Responsive adjustments for very small screens */
+        @media (max-width: 480px) {
+            body { padding: 5px; }
+            h1 { font-size: 18px; }
+            .day-cell { min-height: 50px; padding: 4px 1px; }
+            .day-number { font-size: 13px; }
+            .badge-count { font-size: 8px; padding: 1px 2px; }
+            .day-label { font-size: 11px; }
         }
     </style>
 </head>
@@ -200,7 +227,7 @@
 
     <!-- Upcoming Event List -->
     <div class="calendar-card">
-        <h2 style="color: var(--primary);">Upcoming Events (Chronological)</h2>
+        <h2 style="color: var(--primary); font-size: 18px; margin-bottom: 15px;">Upcoming Events (Chronological)</h2>
         <div id="eventList">No events found.</div>
     </div>
 </div>
@@ -208,7 +235,7 @@
 <!-- Add/Edit Event Modal -->
 <div class="modal" id="eventModal">
     <div class="modal-content">
-        <h2 id="modalTitle" style="color: var(--primary); margin-top:0;">New Speech Entry</h2>
+        <h2 id="modalTitle" style="color: var(--primary); margin-top:0; font-size: 20px;">New Speech Entry</h2>
         <form id="eventForm">
             <input type="hidden" id="selectedDate">
             <input type="hidden" id="editIndex" value="-1">
@@ -220,23 +247,12 @@
             
             <div class="form-group">
                 <label>Time (12-hour):</label>
-                <div style="display: flex; gap: 10px;">
+                <div style="display: flex; gap: 8px;">
                     <select id="hour" style="flex: 1;" required>
                         <option value="">Hour</option>
-                        <script>
-                            for(let h=1; h<=12; h++) {
-                                document.write(`<option value="${h}">${h}</option>`);
-                            }
-                        </script>
                     </select>
                     <select id="minute" style="flex: 1;" required>
-                        <option value="00">00</option>
-                        <option value="15">15</option>
-                        <option value="30">30</option>
-                        <option value="45">45</option>
-                        <script>
-                            // Alternatively allow exact minutes if typed or selected: let's add option loop for 00 to 59 if needed, or keep simple select:
-                        </script>
+                        <option value="">Minute</option>
                     </select>
                     <select id="ampm" style="flex: 1;" required>
                         <option value="AM">AM</option>
@@ -244,15 +260,6 @@
                     </select>
                 </div>
             </div>
-            <script>
-                // Populate minute options 00 to 59 accurately
-                let minSelect = document.getElementById('minute');
-                minSelect.innerHTML = '';
-                for(let m=0; m<60; m++) {
-                    let mStr = String(m).padStart(2, '0');
-                    minSelect.innerHTML += `<option value="${mStr}">${mStr}</option>`;
-                }
-            </script>
 
             <div class="form-group">
                 <label>Location:</label>
@@ -278,6 +285,20 @@
     let currentDate = new Date();
     let events = JSON.parse(localStorage.getItem('speechEvents')) || [];
 
+    function populateTimeDropdowns() {
+        const hourSelect = document.getElementById('hour');
+        for (let h = 1; h <= 12; h++) {
+            hourSelect.innerHTML += `<option value="${h}">${h}</option>`;
+        }
+
+        const minSelect = document.getElementById('minute');
+        minSelect.innerHTML = '';
+        for (let m = 0; m < 60; m++) {
+            let mStr = String(m).padStart(2, '0');
+            minSelect.innerHTML += `<option value="${mStr}">${mStr}</option>`;
+        }
+    }
+
     function openModal(selectedDate, editIdx = -1) { 
         document.getElementById('editIndex').value = editIdx;
 
@@ -289,7 +310,6 @@
             document.getElementById('location').value = ev.location;
             document.getElementById('contact').value = ev.contact || '';
             
-            // Set hour, minute, ampm
             document.getElementById('hour').value = ev.hour || '12';
             document.getElementById('minute').value = ev.minute || '00';
             document.getElementById('ampm').value = ev.ampm || 'AM';
@@ -320,7 +340,6 @@
         const minute = document.getElementById('minute').value;
         const ampm = document.getElementById('ampm').value;
 
-        // Calculate 24hr format string for sorting purpose internally
         let h24 = parseInt(hour);
         if (ampm === 'PM' && h24 < 12) h24 += 12;
         if (ampm === 'AM' && h24 === 12) h24 = 0;
@@ -362,7 +381,6 @@
         }
     }
 
-    // Helper to format date as DD/MM/YYYY
     function formatDateDDMMYYYY(dateString) {
         if (!dateString) return '';
         const parts = dateString.split('-');
@@ -402,7 +420,7 @@
             grid.innerHTML += `
                 <div class="day-cell ${isBusy ? 'busy' : 'free'}" onclick="openModal('${formattedDate}')">
                     <div class="day-number">${day}</div>
-                    ${isBusy ? `<span class="badge-count">${dayEvents.length} Event(s)</span>` : '<span style="font-size:11px; color:#22c55e; font-weight:600;">Free</span>'}
+                    ${isBusy ? `<span class="badge-count">${dayEvents.length} Event(s)</span>` : '<span style="font-size:9px; color:#22c55e; font-weight:600;">Free</span>'}
                 </div>
             `;
         }
@@ -413,18 +431,18 @@
         list.innerHTML = '';
 
         if (events.length === 0) {
-            list.innerHTML = '<p style="color:#64748b;">No speech programs scheduled.</p>';
+            list.innerHTML = '<p style="color:#64748b; font-size: 14px;">No speech programs scheduled.</p>';
             return;
         }
 
         events.forEach((ev, index) => {
             const displayDate = formatDateDDMMYYYY(ev.date);
-            const displayTime = ev.hour ? `${ev.hour}:${ev.minute} ${ev.ampm}` : (ev.time ? `${ev.time} ${ev.ampm || ''}` : '');
+            const displayTime = ev.hour ? `${ev.hour}:${ev.minute} ${ev.ampm}` : '';
             
             list.innerHTML += `
                 <div class="event-card">
-                    <div>
-                        <strong style="font-size: 16px; color: var(--primary);">${ev.title}</strong><br>
+                    <div class="event-info">
+                        <strong style="font-size: 15px; color: var(--primary);">${ev.title}</strong><br>
                         <span>📅 ${displayDate} | ⏰ ${displayTime}</span><br>
                         <span>📍 ${ev.location}</span><br>
                         <span>📞 ${ev.contact || 'N/A'}</span>
@@ -443,6 +461,7 @@
         renderCalendar();
     }
 
+    populateTimeDropdowns();
     render();
 </script>
 
